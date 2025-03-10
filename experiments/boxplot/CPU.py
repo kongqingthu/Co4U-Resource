@@ -23,7 +23,7 @@ box_colors = ["#fcdc97", "#ababab", "#8dc2d8", "#e58580"]   # 箱体填充颜色
 custom_labels = ["Brotli", "Gzip", "Zstd", "Co4U"]
 
 # 创建图表
-plt.figure(figsize=(20, 11))
+plt.figure(figsize=(8/2.54, 6/2.54))
 ax = plt.gca()
 
 # 使用 matplotlib 的 boxplot 函数绘制箱型图
@@ -60,7 +60,7 @@ plt.yticks(fontsize=37)
 plt.grid(True)
 
 # 导出为PDF
-with PdfPages('cpu_boxplot.pdf') as pdf:
+with PdfPages('cpu_boxplot1.pdf') as pdf:
     pdf.savefig(plt.gcf())  # 保存当前图表
 
 # 显示图表
