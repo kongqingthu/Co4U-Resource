@@ -14,8 +14,8 @@ assert data.shape[1] == 4, "CSV 文件应包含四列数据"
 # 设置字体为 Times New Roman
 plt.rcParams['font.family'] = 'Times New Roman'
 
-# 线条颜色设置
-lw = 3
+# 线条设置
+lw = 1
 line_colors = ["#cc8d05", "#383838", "#2e6b85", "#98251f"]  # 线条颜色（中位线、须线、边框）
 box_colors = ["#fcdc97", "#ababab", "#8dc2d8", "#e58580"]   # 箱体填充颜色
 
@@ -49,19 +49,16 @@ for i in range(n):
         cap.set_color(line_colors[i])
         cap.set_linewidth(lw)
 
-# 设置离群值的颜色
-for i, flier in enumerate(bp['fliers']):
-    flier.set(marker='o', markeredgecolor=line_colors[i], alpha=1, linewidth=3)
-
 # 设置坐标轴标签和网格
-plt.ylabel('CPU Usage (%)', fontsize=40)
-plt.xticks(ticks=range(1, n+1), labels=custom_labels, fontsize=37)
-plt.yticks(fontsize=37)
+plt.ylabel('CPU Usage (%)', fontsize=10)
+plt.xticks(ticks=range(1, n+1), labels=custom_labels, fontsize=10)
+plt.yticks(fontsize=10)
 plt.grid(True)
 
 # 导出为PDF
-with PdfPages('cpu_boxplot1.pdf') as pdf:
+with PdfPages('cpu_boxplot.pdf') as pdf:
     pdf.savefig(plt.gcf())  # 保存当前图表
 
 # 显示图表
+plt.tight_layout()
 plt.show()
