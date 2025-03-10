@@ -16,14 +16,14 @@ time_range = pd.date_range(start=start_time, end=end_time, periods=len(df))
 plt.rcParams['font.family'] = 'Times New Roman'
 
 # 创建图表
-linewidth = 4
-plt.figure(figsize=(20, 11))
-plt.plot(time_range, df[0], label='gzip', linewidth=linewidth, color='#383838')
-plt.plot(time_range, df[1], label='Co4U', linewidth=linewidth, color='#D4352D')
+# linewidth = 4
+plt.figure(figsize=(8/2.54, 6/2.54))
+plt.plot(time_range, df[0], label='gzip', color='#383838')
+plt.plot(time_range, df[1], label='Co4U', color='#D4352D')
 
 # 设置图表标签
-plt.xlabel('Time', fontsize=39)
-plt.ylabel('Compression Rate', fontsize=39)
+plt.xlabel('Time', fontsize=10)
+plt.ylabel('Compression Rate', fontsize=10)
 
 # 设置纵坐标显示百分号
 plt.gca().yaxis.set_major_formatter(ticker.PercentFormatter(xmax=1, decimals=0))
@@ -31,16 +31,20 @@ plt.gca().yaxis.set_major_formatter(ticker.PercentFormatter(xmax=1, decimals=0))
 # 设置时间格式为小时和分钟
 plt.gca().xaxis.set_major_formatter(mdates.DateFormatter('%H:%M'))
 
+# 设置横坐标刻度间隔为 5 小时
+plt.gca().xaxis.set_major_locator(mdates.HourLocator(interval=5))
+
 # 添加图例
-plt.legend(fontsize=39)
+plt.legend(fontsize=10, loc='best')
 
 # 调整刻度字体
-plt.tick_params(axis='both', labelsize=36)
+plt.tick_params(axis='both', labelsize=10)
 
 # 添加网格
 plt.grid(True, linestyle='--', alpha=0.7)
 
 # 导出为PDF
+plt.tight_layout()
 with PdfPages('compression_rate_chart.pdf') as pdf:
     pdf.savefig(plt.gcf())  # 保存当前图表
 
