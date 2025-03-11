@@ -15,15 +15,15 @@ assert data.shape[1] == 4, "CSV 文件应包含四列数据"
 plt.rcParams['font.family'] = 'Times New Roman'
 
 # 线条颜色设置
-lw = 1
-line_colors = ["#cc8d05", "#383838", "#2e6b85", "#98251f"]  # 线条颜色（中位线、须线、边框）
-box_colors = ["#fcdc97", "#ababab", "#8dc2d8", "#e58580"]   # 箱体填充颜色
+lw = 1.8
+line_colors = ["#fbce6a", "#383838", "#5ca7c7", "#d4352d"]  # 线条颜色（中位线、须线、边框）
+box_colors = ["#fbce6a", "#383838", "#5ca7c7", "#d4352d"]   # 箱体填充颜色
 
 # 自定义横轴标签
 custom_labels = ["Brotli", "Gzip", "Zstd", "Co4U"]
 
 # 创建图表
-plt.figure(figsize=(8/2.54, 6/2.54))
+plt.figure(figsize=(17.6/2.54, 13.2/2.54))
 ax = plt.gca()
 
 # 使用 matplotlib 的 boxplot 函数绘制箱型图
@@ -50,15 +50,16 @@ for i in range(n):
         cap.set_linewidth(lw)
 
 # 设置坐标轴标签和网格
-plt.ylabel('Memory Usage (%)', fontsize=10)
-plt.xticks(ticks=range(1, n+1), labels=custom_labels, fontsize=10)
-plt.yticks(fontsize=10)
+plt.ylabel('Memory Usage (%)', fontsize=30)
+plt.xticks(ticks=range(1, n+1), labels=custom_labels, fontsize=30)
+plt.yticks(fontsize=30)
 plt.grid(True)
 
+# 直接控制坐标轴的位置和大小
+ax.set_position([0.18, 0.2, 0.77, 0.75])
+
 # 导出为PDF
-with PdfPages('memory_boxplot.pdf') as pdf:
-    pdf.savefig(plt.gcf())  # 保存当前图表
+plt.savefig('memory_boxplot.pdf', bbox_inches='tight', dpi=1200)
 
 # 显示图表
-plt.tight_layout()
 plt.show()
